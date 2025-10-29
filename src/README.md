@@ -299,23 +299,6 @@ def city_weather(message):
     bot.send_message(message.chat.id, f"Погода в {city}: {forecast}")
 ```
 
-### 9. Документирование и публикация проекта
-
-- Подробное руководство и туториал оформить в Markdown (README.md).
-- Иллюстрации внедрить внутрь текста:
-
-```
-![UML Use Case Diagram][image:1]
-![Component Diagram][image:2]
-![Sequence Diagram][3]
-![Flowchart][4]
-![Comparison Table][5]
-![Class Diagram][6]
-```
-
-- Использовать Github Pages или другой статический сайт для публикации HTML-версии.
-- В репозитории README.md, diagrams/, bot.py, .env.sample, bot.log (лог, если нужен).
-
 ***
 
 ### Итоговая структура репозитория:
