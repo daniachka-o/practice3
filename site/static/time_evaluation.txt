@@ -1,0 +1,123 @@
+#import soundfile as sf
+import numpy as np
+from scipy.optimize import least_squares
+
+"""
+Берем самый громкий момент в первой дорожке и ищем самые громкие точки в других дорожках во временном промежутке 
+около первого
+"""
+
+def main():
+    #audio_data, sample_rate = sf.read('A1_CH_00_10.wav')
+
+    mash_cords = [
+    (0.000, 0.700),   # 1 - стартовая позиция (север)
+    (0.495, 0.495),   # 2 - северо-восток
+    (0.700, 0.000),   # 3 - восток
+    (0.495, -0.495),  # 4 - юго-восток
+    (0.000, -0.700),  # 5 - юг
+    (-0.495, -0.495), # 6 - юго-запад
+    (-0.700, 0.000),  # 7 - запад
+    (-0.495, 0.495)   # 8 - северо-запад
+    ]
+    #peak_times_corr = find_peaks(audio_data, sample_rate)
+
+    peak_times_corr = [0.027113, 0.027748, 0.029225, 0.030631, 0.031195, 0.030631, 0.029225, 0.027748]
+    #peak_times_corr = [0.289504, 0.290105, 0.291552, 0.292991, 0.293586, 0.292991, 0.291552, 0.290105]
+
+    #for ch, time in enumerate(peak_times_corr):
+    #    print(f"Канал {ch + 1}: {time:.6f} сек")
+
+    peak_times_corr_enum =  [(elem, idx) for idx, elem in enumerate(peak_times_corr)]
+    peak_times_corr_sort = sorted(peak_times_corr_enum, key=lambda x: x[0])
+    if  peak_times_corr_sort[2][0] == peak_times_corr_sort[1][0]:
+        peak_times_corr_sort[2] = peak_times_corr_sort[3]
+
+
+    mash_cords_sorted = [mash_cords[peak_times_corr_sort[0][1]], mash_cords[peak_times_corr_sort[1][1]], mash_cords[peak_times_corr_sort[2][1]]]
+
+
+    result = tdoa(mash_cords_sorted, peak_times_corr_sort)
+
+    distance = (result[0]**2 + result[1]**2)**0.5
+    print(distance)
+    return distance
+
+
+
+
+def find_peaks(audio_data, sample_rate, num_channels=8, ref_channel=0):
+    ref_signal = audio_data[:, ref_channel]
+
+    # Находим главный пик в нулевом канале
+    ref_peak_idx = int(np.argmax(np.abs(ref_signal)))
+    window = int(sample_rate * 0.02)  # окно 20 мс для точного поиска
+
+    start_idx = max(0, ref_peak_idx - window)
+    end_idx = min(len(ref_signal), ref_peak_idx + window)
+
+    ref_segment = ref_signal[start_idx:end_idx]
+
+    peak_times = []
+
+    for ch in range(num_channels):
+        if ch == ref_channel:
+            peak_time = ref_peak_idx / sample_rate
+        else:
+            # Кросс-корреляция
+            channel_signal = audio_data[start_idx:end_idx, ch]
+            correlation = np.correlate(channel_signal, ref_segment, mode='full')
+
+            # Задержка
+            delay = np.argmax(correlation) - len(ref_segment) + 1
+            precise_peak_idx = ref_peak_idx + delay
+            peak_time = precise_peak_idx / sample_rate
+
+        peak_times.append(peak_time)
+
+    return peak_times
+
+def tdoa(cords, time):
+    sound_sp = 343
+    delta_d_1 = (time[1][0] - time[0][0]) * sound_sp
+    delta_d_2 = (time[2][0] - time[0][0]) * sound_sp
+    return solve_tdoa_system(cords, delta_d_1, delta_d_2)
+
+
+def solve_tdoa_system(mic_cords, d1, d2, initial_guess=(0, 50)):
+    x0, y0 = mic_cords[0]
+    x1, y1 = mic_cords[1]
+    x2, y2 = mic_cords[2]
+
+    def equations(variables):
+        x, y = variables
+        r0 = np.sqrt((x - x0) ** 2 + (y - y0) ** 2)
+        r1 = np.sqrt((x - x1) ** 2 + (y - y1) ** 2)
+        r2 = np.sqrt((x - x2) ** 2 + (y - y2) ** 2)
+
+        eq1 = r1 - r0 - d1
+        eq2 = r2 - r0 - d2
+
+        return [eq1, eq2]
+
+    # Решаем систему методом наименьших квадратов
+    result = least_squares(equations, initial_guess, method='lm')
+
+    if result.success:
+        return result.x
+    else:
+        raise ValueError("Решение не найдено")
+
+
+if __name__ == "__main__":
+    main()
+
+"""
+Синтетические данные:
+(время отправки сигнала - нулевая секунда)
+Скорость звука - 343 м/с
+10 метров:
+[0.027113, 0.027748, 0.029225, 0.030631, 0.031195, 0.030631, 0.029225, 0.027748]
+100 метров:
+[0.289504, 0.290105, 0.291552, 0.292991, 0.293586, 0.292991, 0.291552, 0.290105]
+"""

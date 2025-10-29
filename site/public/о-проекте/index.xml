@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>О Проектеs on Главная</title>
+    <link>http://localhost:1313/%D0%BE-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B5/</link>
+    <description>Recent content in О Проектеs on Главная</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 29 Oct 2025 15:47:50 +0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/%D0%BE-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B5/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Проектная деятельность</title>
+      <link>http://localhost:1313/%D0%BE-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B5/my-first-post/</link>
+      <pubDate>Wed, 29 Oct 2025 15:47:50 +0300</pubDate>
+      <guid>http://localhost:1313/%D0%BE-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B5/my-first-post/</guid>
+      <description>&lt;h2 id=&#34;введение&#34;&gt;Введение&lt;/h2&gt;&#xA;&lt;p&gt;Проект «&lt;em&gt;&lt;strong&gt;Компьютерный слух. Программно-аппаратный комплекс для беспилотных автомобилей&lt;/strong&gt;&lt;/em&gt;»&lt;br&gt;&#xA;Куратор проекта: &lt;em&gt;Фурлетов Юрий Михайлович&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
