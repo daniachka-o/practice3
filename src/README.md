@@ -3,30 +3,26 @@
 **Этапы исследования и реализации:**
 
 1. **Изучение предметной области:**
-    - Что такое Telegram-боты, зачем они нужны, где применяются.
-    - Обзор популярных Python-библиотек для создания ботов: pyTelegramBotAPI, python-telegram-bot, Telethon.
+    - Что такое Telegram-боты.
+    - Краткий обзор популярных Python-библиотек для создания ботов: pyTelegramBotAPI, python-telegram-bot, Telethon.
 2. **Получение токена для бота:**
     - Взаимодействие с BotFather в Telegram.
     - Создание нового бота, получение и хранение токена.
 3. **Настройка среды разработки:**
-    - Установка Python, pip.
+    - Установка среды Python.
     - Установка pyTelegramBotAPI: `pip install pyTelegramBotAPI`
     - Настройка `.env` файла с токеном.
 4. **Разработка базового Telegram-бота:**
-    - Импорт необходимых модулей.
+    - Импорт необходимых библиотек.
     - Инициализация объекта TeleBot с токеном.
-    - Реализация обработчиков команд `/start`, `/hello`, эхо-ответа.
+    - Реализация обработчиков команд `/start`, `/hello`.
 5. **Реализация функционала гороскопа:**
     - Получение знака зодиака и дня от пользователя через цепочки сообщений.
     - Запрос к стороннему Horoscope API для получения гороскопа.
     - Обработка и отправка ответа пользователю.
 6. **Обработка ошибок и исключительных ситуаций:**
     - Неверный токен, ошибки API, некорректный ввод пользователя.
-7. **Визуализация архитектуры:**
-    - UML-диаграммы: Use Case, Component, Sequence, Class, Activity (или Flowchart).
-    - Таблица для сравнения библиотек.
-    - Схемы взаимодействия и архитектуры.
-8. **Модификация проекта:**
+7. **Модификация проекта:**
     - Добавление обработки запроса погоды.
     - Добавление обработки свободных запросов с помощью LLM GigaChat
 
@@ -40,7 +36,7 @@
 - Основные варианты реализации на Python:
 
 
-| Библиотека | Синхронность | Простота | Комьюнити | Актуальность |
+| Библиотека | Тип синхронизации | Удобство использования | Поддержка сообщества | Актуальность |
 | :-- | :-- | :-- | :-- | :-- |
 | pyTelegramBotAPI | Оба режима | Высокая | Средняя | 2025-10 |
 | python-telegram-bot | Оба режима | Средняя | Высокая | 2025-10 |
@@ -58,21 +54,19 @@
 ```
 BOT_TOKEN=your-bot-token-here
 ```
-Рекомендуется использовать загрузку переменных окружения из файла `.env` через библиотеку `python-dotenv`.
+Рекомендуется использовать загрузку переменных из файла `.env` через библиотеку `python-dotenv`.
 
 
-![UML Use Case Diagram: User, BotFather, and Telegram Bot Interactions]
+Диаграмма взаимодействия Пользователя, BotFather и Telegram Bot Interactions
 
 ![UML Use Case Diagram: User, BotFather, and Telegram Bot Interactions](diagrams/use-case.png) 
-
-UML Use Case Diagram: User, BotFather, and Telegram Bot Interactions
 
 ***
 
 ### 3. Подготовка Python-среды
 
 - Установить Python ≥ 3.8 и pip.
-- Установить зависимости:
+- Установить библиотеки:
 
 ```
 pip install pyTelegramBotAPI requests python-dotenv
@@ -126,17 +120,10 @@ bot.infinity_polling()
 - bot.py — основной скрипт
 - .env — токен
 
-![Component Diagram: Python Telegram Bot Project]
+Структура компонентов бота
 
 ![Component Diagram: Python Telegram Bot Project](diagrams/component.png)
 
-Component Diagram: Python Telegram Bot Project
-
-![Class Diagram: Core Classes in pyTelegramBotAPI-Based Bot]
-
-![Class Diagram: Core Classes in pyTelegramBotAPI-Based Bot](diagrams/class-diagram.png)
-
-Class Diagram: Core Classes in pyTelegramBotAPI-Based Bot
 
 ***
 
@@ -182,11 +169,9 @@ def fetch_horoscope(message, sign):
     bot.send_message(message.chat.id, horoscope_message, parse_mode="Markdown")
 ```
 
-![Sequence Diagram: Getting a Horoscope via Telegram Bot]
+Структура взаимодействия пользователя/бота/сервера
 
 ![Sequence Diagram: Getting a Horoscope via Telegram Bot](diagrams/horoscope_sequence.png)
-
-Sequence Diagram: Getting a Horoscope via Telegram Bot
 
 ***
 
@@ -196,35 +181,14 @@ Sequence Diagram: Getting a Horoscope via Telegram Bot
 - Проверять статус ответа сервера API.
 - Проверять ввод пользователя (существуют ли такие знаки и формат даты).
 
-![Flowchart: Telegram Bot Error Handling]
+
+Алгоритм действий бота
 
 ![Flowchart: Telegram Bot Error Handling](diagrams/error_flow.png)
 
-Flowchart: Telegram Bot Error Handling
-
 ***
 
-### 7. Визуализация архитектуры
-
-- Диаграммы (см. выше): Use Case , Component , Sequence , Class , Таблица , Flowchart.
-- В помощь начинающим — каждую диаграмму/схему сопровождать пояснением.
-
-***
-
-### 8. Модификация проекта (творческий пункт)
-
-**Добавление логирования:**
-
-- Создать лог-файл, записывать туда все входящие запросы и ответы.
-- В обработчиках добавить:
-
-```python
-import logging
-
-logging.basicConfig(filename='bot.log', level=logging.INFO)
-logging.info(f"User: {message.chat.id}, Text: {message.text}")
-```
-
+### 7. Модификация проекта (творческий пункт)
 
 **Интеграция с LLM GigaChat**
 
@@ -297,10 +261,12 @@ def city_weather(message):
 ### Итоговая структура репозитория:
 
 ```
-project-repo/
+practice3/src/
 ├── bot.py
-├── .env.sample
+├── .env.example
 ├── README.md
+├── requirement.txt
+├── gigachat_client.py
 ├── diagrams/
 │   ├── use-case.png
 │   ├── component.png
@@ -308,7 +274,6 @@ project-repo/
 │   ├── error_flow.png
 │   ├── class-diagram.png
 │   └── libs-table.png
-├── bot.log
 ```
 
 
