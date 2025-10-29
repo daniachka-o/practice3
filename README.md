@@ -1,5 +1,9 @@
 # Проектная (учебная) практика
 
+## Период проведения
+
+С 03 февраля 2025 г. по 30 октября 2025 г.
+
 ## Участники
 
 | ФИО | Учебная группа | Код направления подготовки | Профиль образовательной программы |
@@ -9,12 +13,6 @@
 ## Задание
 
 Задание размещено в папке **task** в файле [README.md](task/README.md).
-
-## Вариативная часть задания
-
-Build your own Bot. Python: How To Create a Telegram Bot Using Python.
-
-https://www.freecodecamp.org/news/how-to-create-a-telegram-bot-using-python/
 
 ## Ответственный по проектной (учебной) практике
 
@@ -26,6 +24,9 @@ https://www.freecodecamp.org/news/how-to-create-a-telegram-bot-using-python/
 
 Куратор по проектной деятельности: Фурлетов Юрий Михайлович.
 
-## Период проведения
+## Вариативная часть задания
 
-С 03 февраля 2025 г. по 30 октября 2025 г.
+Build your own Bot. Python: How To Create a Telegram Bot Using Python.
+
+https://www.freecodecamp.org/news/how-to-create-a-telegram-bot-using-python/
+
