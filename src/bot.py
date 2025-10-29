@@ -38,7 +38,7 @@ if GIGACHAT_CLIENT_ID and GIGACHAT_CLIENT_SECRET and GIGACHAT_AUTH_URL and GIGAC
         auth_url=GIGACHAT_AUTH_URL,
         api_url=GIGACHAT_URL,
         models_url=GIGACHAT_MODELS_URL,
-        verify_ssl=True,
+        verify_ssl=False,
     )
 
 @bot.message_handler(commands=['старт', 'привет'], content_types=['text'])
