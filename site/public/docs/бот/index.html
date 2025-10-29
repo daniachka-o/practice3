@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Этапы исследования и реализации:#Изучение предметной области: Что такое Telegram-боты. Краткий обзор популярных Python-библиотек для создания ботов: pyTelegramBotAPI, python-telegram-bot, Telethon. Получение токена для бота: Взаимодействие с BotFather в Telegram. Создание нового бота, получение и хранение токена. Настройка среды разработки: Установка среды Python. Установка pyTelegramBotAPI: pip install pyTelegramBotAPI Настройка .env файла с токеном. Разработка базового Telegram-бота: Импорт необходимых библиотек. Инициализация объекта TeleBot с токеном. Реализация обработчиков команд /start, /hello. Реализация функционала гороскопа: Получение знака зодиака и дня от пользователя через цепочки сообщений. Запрос к стороннему Horoscope API для получения гороскопа. Обработка и отправка ответа пользователю. Обработка ошибок и исключительных ситуаций: Неверный токен, ошибки API, некорректный ввод пользователя. Модификация проекта: Добавление обработки запроса погоды. Добавление обработки свободных запросов с помощью LLM GigaChat Пошаговое выполнение#1. Исследование предметной области#Telegram-бот — это приложение, работающее внутри чата Telegram, с которым взаимодействует пользователь через команды и сообщения. Основные варианты реализации на Python: Библиотека Тип синхронизации Удобство использования Поддержка сообщества Актуальность pyTelegramBotAPI Оба режима Высокая Средняя 2025-10 python-telegram-bot Оба режима Средняя Высокая 2025-10 Telethon Асинхронная Низкая Средняя 2025-10 2. Получение токена у BotFather#Найти в Telegram пользователя @BotFather. Запустить диалог, отправить команду /newbot. Следовать инструкциям, получить уникальный токен для нового бота. Сохранить токен в .env-файл: BOT_TOKEN=your-bot-token-hereРекомендуется использовать загрузку переменных из файла .env через библиотеку python-dotenv.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/%D0%B1%D0%BE%D1%82/">
+  <meta property="og:site_name" content="Главная">
+  <meta property="og:title" content="Telegram бот">
+  <meta property="og:description" content="Этапы исследования и реализации:#Изучение предметной области: Что такое Telegram-боты. Краткий обзор популярных Python-библиотек для создания ботов: pyTelegramBotAPI, python-telegram-bot, Telethon. Получение токена для бота: Взаимодействие с BotFather в Telegram. Создание нового бота, получение и хранение токена. Настройка среды разработки: Установка среды Python. Установка pyTelegramBotAPI: pip install pyTelegramBotAPI Настройка .env файла с токеном. Разработка базового Telegram-бота: Импорт необходимых библиотек. Инициализация объекта TeleBot с токеном. Реализация обработчиков команд /start, /hello. Реализация функционала гороскопа: Получение знака зодиака и дня от пользователя через цепочки сообщений. Запрос к стороннему Horoscope API для получения гороскопа. Обработка и отправка ответа пользователю. Обработка ошибок и исключительных ситуаций: Неверный токен, ошибки API, некорректный ввод пользователя. Модификация проекта: Добавление обработки запроса погоды. Добавление обработки свободных запросов с помощью LLM GigaChat Пошаговое выполнение#1. Исследование предметной области#Telegram-бот — это приложение, работающее внутри чата Telegram, с которым взаимодействует пользователь через команды и сообщения. Основные варианты реализации на Python: Библиотека Тип синхронизации Удобство использования Поддержка сообщества Актуальность pyTelegramBotAPI Оба режима Высокая Средняя 2025-10 python-telegram-bot Оба режима Средняя Высокая 2025-10 Telethon Асинхронная Низкая Средняя 2025-10 2. Получение токена у BotFather#Найти в Telegram пользователя @BotFather. Запустить диалог, отправить команду /newbot. Следовать инструкциям, получить уникальный токен для нового бота. Сохранить токен в .env-файл: BOT_TOKEN=your-bot-token-hereРекомендуется использовать загрузку переменных из файла .env через библиотеку python-dotenv.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2025-10-29T15:47:50+03:00">
+    <meta property="article:modified_time" content="2025-10-29T15:47:50+03:00">
+
+
+  <meta itemprop="name" content="Telegram бот">
+  <meta itemprop="description" content="Этапы исследования и реализации:#Изучение предметной области: Что такое Telegram-боты. Краткий обзор популярных Python-библиотек для создания ботов: pyTelegramBotAPI, python-telegram-bot, Telethon. Получение токена для бота: Взаимодействие с BotFather в Telegram. Создание нового бота, получение и хранение токена. Настройка среды разработки: Установка среды Python. Установка pyTelegramBotAPI: pip install pyTelegramBotAPI Настройка .env файла с токеном. Разработка базового Telegram-бота: Импорт необходимых библиотек. Инициализация объекта TeleBot с токеном. Реализация обработчиков команд /start, /hello. Реализация функционала гороскопа: Получение знака зодиака и дня от пользователя через цепочки сообщений. Запрос к стороннему Horoscope API для получения гороскопа. Обработка и отправка ответа пользователю. Обработка ошибок и исключительных ситуаций: Неверный токен, ошибки API, некорректный ввод пользователя. Модификация проекта: Добавление обработки запроса погоды. Добавление обработки свободных запросов с помощью LLM GigaChat Пошаговое выполнение#1. Исследование предметной области#Telegram-бот — это приложение, работающее внутри чата Telegram, с которым взаимодействует пользователь через команды и сообщения. Основные варианты реализации на Python: Библиотека Тип синхронизации Удобство использования Поддержка сообщества Актуальность pyTelegramBotAPI Оба режима Высокая Средняя 2025-10 python-telegram-bot Оба режима Средняя Высокая 2025-10 Telethon Асинхронная Низкая Средняя 2025-10 2. Получение токена у BotFather#Найти в Telegram пользователя @BotFather. Запустить диалог, отправить команду /newbot. Следовать инструкциям, получить уникальный токен для нового бота. Сохранить токен в .env-файл: BOT_TOKEN=your-bot-token-hereРекомендуется использовать загрузку переменных из файла .env через библиотеку python-dotenv.">
+  <meta itemprop="datePublished" content="2025-10-29T15:47:50+03:00">
+  <meta itemprop="dateModified" content="2025-10-29T15:47:50+03:00">
+  <meta itemprop="wordCount" content="696">
+
+<title>Telegram бот | Главная</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/%D0%B1%D0%BE%D1%82/">
+<link rel="stylesheet" href="/book.min.cc2c524ed250aac81b23d1f4af87344917b325208841feca0968fe450f570575.css" integrity="sha256-zCxSTtJQqsgbI9H0r4c0SRezJSCIQf7KCWj&#43;RQ9XBXU=" crossorigin="anonymous">
+
+
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.919aa3081d7a9a40b634ff0201c7857ec150ef7898d878aefd61ca4aa35e8594.js" integrity="sha256-kZqjCB16mkC2NP8CAceFfsFQ73iY2Hiu/WHKSqNehZQ=" crossorigin="anonymous"></script>
+
+
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Главная</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%D0%B1%D0%BE%D1%82/" class="active">
+      Telegram бот</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%D0%BE%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B5/" class="">
+      О проекте</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%D1%80%D0%B5%D1%81%D1%83%D1%80%D1%81%D1%8B/" class="">
+      Ресурсы</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%D1%83%D1%87%D0%B0%D1%81%D1%82%D0%BD%D0%B8%D0%BA%D0%B8/" class="">
+      Участники</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%D0%B6%D1%83%D1%80%D0%BD%D0%B0%D0%BB/" class="">
+      Журнал</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Telegram бот</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#этапы-исследования-и-реализации"><strong>Этапы исследования и реализации:</strong></a></li>
+    <li><a href="#пошаговое-выполнение">Пошаговое выполнение</a>
+      <ul>
+        <li><a href="#1-исследование-предметной-области">1. Исследование предметной области</a></li>
+        <li><a href="#2-получение-токена-у-botfather">2. Получение токена у BotFather</a></li>
+        <li><a href="#3-подготовка-python-среды">3. Подготовка Python-среды</a></li>
+        <li><a href="#4-разработка-базового-telegram-бота">4. Разработка базового Telegram-бота</a></li>
+        <li><a href="#5-функционал-гороскопа">5. Функционал гороскопа</a></li>
+        <li><a href="#6-обработка-ошибок">6. Обработка ошибок</a></li>
+        <li><a href="#7-модификация-проекта-творческий-пункт">7. Модификация проекта (творческий пункт)</a></li>
+        <li><a href="#итоговая-структура-репозитория">Итоговая структура репозитория:</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="этапы-исследования-и-реализации"><strong>Этапы исследования и реализации:</strong><a class="anchor" href="#%d1%8d%d1%82%d0%b0%d0%bf%d1%8b-%d0%b8%d1%81%d1%81%d0%bb%d0%b5%d0%b4%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f-%d0%b8-%d1%80%d0%b5%d0%b0%d0%bb%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d0%b8">#</a></h2>
+<ol>
+<li><strong>Изучение предметной области:</strong>
+<ul>
+<li>Что такое Telegram-боты.</li>
+<li>Краткий обзор популярных Python-библиотек для создания ботов: pyTelegramBotAPI, python-telegram-bot, Telethon.</li>
+</ul>
+</li>
+<li><strong>Получение токена для бота:</strong>
+<ul>
+<li>Взаимодействие с BotFather в Telegram.</li>
+<li>Создание нового бота, получение и хранение токена.</li>
+</ul>
+</li>
+<li><strong>Настройка среды разработки:</strong>
+<ul>
+<li>Установка среды Python.</li>
+<li>Установка pyTelegramBotAPI: <code>pip install pyTelegramBotAPI</code></li>
+<li>Настройка <code>.env</code> файла с токеном.</li>
+</ul>
+</li>
+<li><strong>Разработка базового Telegram-бота:</strong>
+<ul>
+<li>Импорт необходимых библиотек.</li>
+<li>Инициализация объекта TeleBot с токеном.</li>
+<li>Реализация обработчиков команд <code>/start</code>, <code>/hello</code>.</li>
+</ul>
+</li>
+<li><strong>Реализация функционала гороскопа:</strong>
+<ul>
+<li>Получение знака зодиака и дня от пользователя через цепочки сообщений.</li>
+<li>Запрос к стороннему Horoscope API для получения гороскопа.</li>
+<li>Обработка и отправка ответа пользователю.</li>
+</ul>
+</li>
+<li><strong>Обработка ошибок и исключительных ситуаций:</strong>
+<ul>
+<li>Неверный токен, ошибки API, некорректный ввод пользователя.</li>
+</ul>
+</li>
+<li><strong>Модификация проекта:</strong>
+<ul>
+<li>Добавление обработки запроса погоды.</li>
+<li>Добавление обработки свободных запросов с помощью LLM GigaChat</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="пошаговое-выполнение">Пошаговое выполнение<a class="anchor" href="#%d0%bf%d0%be%d1%88%d0%b0%d0%b3%d0%be%d0%b2%d0%be%d0%b5-%d0%b2%d1%8b%d0%bf%d0%be%d0%bb%d0%bd%d0%b5%d0%bd%d0%b8%d0%b5">#</a></h2>
+<h3 id="1-исследование-предметной-области">1. Исследование предметной области<a class="anchor" href="#1-%d0%b8%d1%81%d1%81%d0%bb%d0%b5%d0%b4%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%bf%d1%80%d0%b5%d0%b4%d0%bc%d0%b5%d1%82%d0%bd%d0%be%d0%b9-%d0%be%d0%b1%d0%bb%d0%b0%d1%81%d1%82%d0%b8">#</a></h3>
+<ul>
+<li>Telegram-бот — это приложение, работающее внутри чата Telegram, с которым взаимодействует пользователь через команды и сообщения.</li>
+<li>Основные варианты реализации на Python:</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Библиотека</th>
+          <th style="text-align: left">Тип синхронизации</th>
+          <th style="text-align: left">Удобство использования</th>
+          <th style="text-align: left">Поддержка сообщества</th>
+          <th style="text-align: left">Актуальность</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">pyTelegramBotAPI</td>
+          <td style="text-align: left">Оба режима</td>
+          <td style="text-align: left">Высокая</td>
+          <td style="text-align: left">Средняя</td>
+          <td style="text-align: left">2025-10</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">python-telegram-bot</td>
+          <td style="text-align: left">Оба режима</td>
+          <td style="text-align: left">Средняя</td>
+          <td style="text-align: left">Высокая</td>
+          <td style="text-align: left">2025-10</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Telethon</td>
+          <td style="text-align: left">Асинхронная</td>
+          <td style="text-align: left">Низкая</td>
+          <td style="text-align: left">Средняя</td>
+          <td style="text-align: left">2025-10</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="2-получение-токена-у-botfather">2. Получение токена у BotFather<a class="anchor" href="#2-%d0%bf%d0%be%d0%bb%d1%83%d1%87%d0%b5%d0%bd%d0%b8%d0%b5-%d1%82%d0%be%d0%ba%d0%b5%d0%bd%d0%b0-%d1%83-botfather">#</a></h3>
+<ol>
+<li>Найти в Telegram пользователя <strong>@BotFather</strong>.</li>
+<li>Запустить диалог, отправить команду <code>/newbot</code>.</li>
+<li>Следовать инструкциям, получить уникальный токен для нового бота.</li>
+<li>Сохранить токен в <code>.env</code>-файл:</li>
+</ol>
+<pre tabindex="0"><code>BOT_TOKEN=your-bot-token-here</code></pre><p>Рекомендуется использовать загрузку переменных из файла <code>.env</code> через библиотеку <code>python-dotenv</code>.</p>
+<p>Диаграмма взаимодействия Пользователя, BotFather и Telegram Bot Interactions</p>
+<p><img src="/use-case.png" alt="UML Use Case Diagram: User, BotFather, and Telegram Bot Interactions" /></p>
+<hr>
+<h3 id="3-подготовка-python-среды">3. Подготовка Python-среды<a class="anchor" href="#3-%d0%bf%d0%be%d0%b4%d0%b3%d0%be%d1%82%d0%be%d0%b2%d0%ba%d0%b0-python-%d1%81%d1%80%d0%b5%d0%b4%d1%8b">#</a></h3>
+<ul>
+<li>Установить Python ≥ 3.8 и pip.</li>
+<li>Установить библиотеки:</li>
+</ul>
+<pre tabindex="0"><code>pip install pyTelegramBotAPI requests python-dotenv</code></pre><ul>
+<li>
+<p>Создать <code>.env</code> для токенов/ключей и подключить его через <code>python-dotenv</code>.
+Пример содержимого:</p>
+<pre tabindex="0"><code>BOT_TOKEN=your-telegram-bot-token
+GIGACHAT_CLIENT_ID=your-client-id
+GIGACHAT_CLIENT_SECRET=your-client-secret
+GIGACHAT_AUTH_URL=https://ngw.devices.sberbank.ru:9443/api/v2/oauth
+GIGACHAT_URL=https://gigachat.devices.sberbank.ru/api/v1/chat/completions
+GIGACHAT_MODELS_URL=https://gigachat.devices.sberbank.ru/api/v1/model
+# Необязательно: модель по умолчанию
+GIGACHAT_MODEL=GigaChat-2-Max
+YANDEX_GEOCODE_API_KEY=your-yandex-geocode-key
+YANDEX_GEOCODE_URL=https://geocode-maps.yandex.ru/1.x/
+YANDEX_WEATHER_API_KEY=your-yandex-weather-key
+YANDEX_WEATHER_URL=https://api.weather.yandex.ru/v2/informers
+HOROSCOPE_API_URL=https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily</code></pre></li>
+</ul>
+<hr>
+<h3 id="4-разработка-базового-telegram-бота">4. Разработка базового Telegram-бота<a class="anchor" href="#4-%d1%80%d0%b0%d0%b7%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b0-%d0%b1%d0%b0%d0%b7%d0%be%d0%b2%d0%be%d0%b3%d0%be-telegram-%d0%b1%d0%be%d1%82%d0%b0">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># bot.py</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> telebot
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>BOT_TOKEN <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>environ<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;BOT_TOKEN&#39;</span>)
+</span></span><span style="display:flex;"><span>bot <span style="color:#f92672">=</span> telebot<span style="color:#f92672">.</span>TeleBot(BOT_TOKEN)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@bot.message_handler</span>(commands<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;start&#39;</span>, <span style="color:#e6db74">&#39;hello&#39;</span>])
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">send_welcome</span>(message):
+</span></span><span style="display:flex;"><span>    bot<span style="color:#f92672">.</span>reply_to(message, <span style="color:#e6db74">&#34;Howdy, how are you doing?&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@bot.message_handler</span>(func<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> msg: <span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">echo_all</span>(message):
+</span></span><span style="display:flex;"><span>    bot<span style="color:#f92672">.</span>reply_to(message, message<span style="color:#f92672">.</span>text)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bot<span style="color:#f92672">.</span>infinity_polling()</span></span></code></pre></div><h4 id="структура-проекта">Структура проекта:<a class="anchor" href="#%d1%81%d1%82%d1%80%d1%83%d0%ba%d1%82%d1%83%d1%80%d0%b0-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b0">#</a></h4>
+<ul>
+<li>bot.py — основной скрипт</li>
+<li>.env — токен</li>
+</ul>
+<p>Структура компонентов бота</p>
+<p><img src="/component.png" alt="Component Diagram: Python Telegram Bot Project" /></p>
+<hr>
+<h3 id="5-функционал-гороскопа">5. Функционал гороскопа<a class="anchor" href="#5-%d1%84%d1%83%d0%bd%d0%ba%d1%86%d0%b8%d0%be%d0%bd%d0%b0%d0%bb-%d0%b3%d0%be%d1%80%d0%be%d1%81%d0%ba%d0%be%d0%bf%d0%b0">#</a></h3>
+<h4 id="получение-данных-по-api">Получение данных по API<a class="anchor" href="#%d0%bf%d0%be%d0%bb%d1%83%d1%87%d0%b5%d0%bd%d0%b8%d0%b5-%d0%b4%d0%b0%d0%bd%d0%bd%d1%8b%d1%85-%d0%bf%d0%be-api">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_daily_horoscope</span>(sign: str, day: str) <span style="color:#f92672">-&gt;</span> dict:
+</span></span><span style="display:flex;"><span>    url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily&#34;</span>
+</span></span><span style="display:flex;"><span>    params <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;sign&#34;</span>: sign, <span style="color:#e6db74">&#34;day&#34;</span>: day}
+</span></span><span style="display:flex;"><span>    response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url, params)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> response<span style="color:#f92672">.</span>json()</span></span></code></pre></div><h4 id="диалог-с-пользователем">Диалог с пользователем<a class="anchor" href="#%d0%b4%d0%b8%d0%b0%d0%bb%d0%be%d0%b3-%d1%81-%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d1%82%d0%b5%d0%bb%d0%b5%d0%bc">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a6e22e">@bot.message_handler</span>(commands<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;horoscope&#39;</span>])
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sign_handler</span>(message):
+</span></span><span style="display:flex;"><span>    text <span style="color:#f92672">=</span> text <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;Какой твой знак зодиака?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Выбери один: Овен, Телец, Близнецы, Рак, Лев, Дева, Весы, Скорпион, Стрелец, Козерог, Водолей, Рыбы.&#34;</span>)
+</span></span><span style="display:flex;"><span>    sent_msg <span style="color:#f92672">=</span> bot<span style="color:#f92672">.</span>send_message(message<span style="color:#f92672">.</span>chat<span style="color:#f92672">.</span>id, text, parse_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Markdown&#34;</span>)
+</span></span><span style="display:flex;"><span>    bot<span style="color:#f92672">.</span>register_next_step_handler(sent_msg, day_handler)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">day_handler</span>(message):
+</span></span><span style="display:flex;"><span>    sign <span style="color:#f92672">=</span> message<span style="color:#f92672">.</span>text
+</span></span><span style="display:flex;"><span>    text <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;Какой день вам нужен?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Выберите один: СЕГОДНЯ, ЗАВТРА, ВЧЕРА, &#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;или дату в формате ГГГГ-ММ-ДД.&#34;</span>)
+</span></span><span style="display:flex;"><span>    sent_msg <span style="color:#f92672">=</span> bot<span style="color:#f92672">.</span>send_message(message<span style="color:#f92672">.</span>chat<span style="color:#f92672">.</span>id, text, parse_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Markdown&#34;</span>)
+</span></span><span style="display:flex;"><span>    bot<span style="color:#f92672">.</span>register_next_step_handler(sent_msg, fetch_horoscope, sign<span style="color:#f92672">.</span>capitalize())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_horoscope</span>(message, sign):
+</span></span><span style="display:flex;"><span>    day <span style="color:#f92672">=</span> message<span style="color:#f92672">.</span>text
+</span></span><span style="display:flex;"><span>    horoscope <span style="color:#f92672">=</span> get_daily_horoscope(sign, day)
+</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> horoscope[<span style="color:#e6db74">&#34;data&#34;</span>]
+</span></span><span style="display:flex;"><span>    horoscope_message <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;*Horoscope:* </span><span style="color:#e6db74">{</span>data[<span style="color:#e6db74">&#34;horoscope_data&#34;</span>]<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">*Sign:* </span><span style="color:#e6db74">{</span>sign<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">*Day:* </span><span style="color:#e6db74">{</span>data[<span style="color:#e6db74">&#34;date&#34;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    bot<span style="color:#f92672">.</span>send_message(message<span style="color:#f92672">.</span>chat<span style="color:#f92672">.</span>id, <span style="color:#e6db74">&#34;Вот ваш гороскоп!&#34;</span>)
+</span></span><span style="display:flex;"><span>    bot<span style="color:#f92672">.</span>send_message(message<span style="color:#f92672">.</span>chat<span style="color:#f92672">.</span>id, horoscope_message, parse_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Markdown&#34;</span>)</span></span></code></pre></div><p>Структура взаимодействия пользователя/бота/сервера</p>
+<p><img src="/horoscope_sequence.png" alt="Sequence Diagram: Getting a Horoscope via Telegram Bot" /></p>
+<hr>
+<h3 id="6-обработка-ошибок">6. Обработка ошибок<a class="anchor" href="#6-%d0%be%d0%b1%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b0-%d0%be%d1%88%d0%b8%d0%b1%d0%be%d0%ba">#</a></h3>
+<ul>
+<li>Проверять корректность токена при запуске.</li>
+<li>Проверять статус ответа сервера API.</li>
+<li>Проверять ввод пользователя (существуют ли такие знаки и формат даты).</li>
+</ul>
+<p>Алгоритм действий бота</p>
+<p><img src="/error_flow.png" alt="Flowchart: Telegram Bot Error Handling" /></p>
+<hr>
+<h3 id="7-модификация-проекта-творческий-пункт">7. Модификация проекта (творческий пункт)<a class="anchor" href="#7-%d0%bc%d0%be%d0%b4%d0%b8%d1%84%d0%b8%d0%ba%d0%b0%d1%86%d0%b8%d1%8f-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b0-%d1%82%d0%b2%d0%be%d1%80%d1%87%d0%b5%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d1%83%d0%bd%d0%ba%d1%82">#</a></h3>
+<p><strong>Интеграция с LLM GigaChat</strong></p>
+<ul>
+<li>Доступ осуществляется по client-credentials (client_id/client_secret) и токену, полученному через OAuth.</li>
+<li>Все сообщения, не являющиеся командами, перенаправляются в GigaChat через <code>GigaChatClient</code>.</li>
+</ul>
+<p>Встраивание в обработчик сообщений</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a6e22e">@bot.message_handler</span>(func<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> msg: <span style="color:#f92672">not</span> msg<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;/&#39;</span>)
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> is_horoscope_context(msg) <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> is_weather_context(msg))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">llm_reply</span>(message):
+</span></span><span style="display:flex;"><span>    user_query <span style="color:#f92672">=</span> message<span style="color:#f92672">.</span>text
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> gigachat_client:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            resp <span style="color:#f92672">=</span> gigachat_client<span style="color:#f92672">.</span>send_chat(user_query)
+</span></span><span style="display:flex;"><span>            answer <span style="color:#f92672">=</span> resp[<span style="color:#e6db74">&#39;choices&#39;</span>][<span style="color:#ae81ff">0</span>][<span style="color:#e6db74">&#39;message&#39;</span>][<span style="color:#e6db74">&#39;content&#39;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>            answer <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;GigaChat error: </span><span style="color:#e6db74">{</span>e<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        answer <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;GigaChat не настроен. Обратитесь к администратору.&#34;</span>
+</span></span><span style="display:flex;"><span>    bot<span style="color:#f92672">.</span>reply_to(message, answer)</span></span></code></pre></div><p><strong>Получение прогноза погоды через Яндекс API</strong></p>
+<ul>
+<li>Команда <code>/weather</code> инициирует сценарий:
+<ol>
+<li>Запрос города</li>
+<li>Геокодирование через Яндекс.Карты API (получение координат)</li>
+<li>Получение погодного прогноза через Яндекс.Погода API</li>
+<li>Возврат результата пользователю
+Пример функций для интеграции</li>
+</ol>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">geocode_city</span>(city: str) <span style="color:#f92672">-&gt;</span> tuple:
+</span></span><span style="display:flex;"><span>    url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://geocode-maps.yandex.ru/1.x/&#34;</span>
+</span></span><span style="display:flex;"><span>    params <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;geocode&#34;</span>: city,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;format&#34;</span>: <span style="color:#e6db74">&#34;json&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;apikey&#34;</span>: <span style="color:#e6db74">&#34;&lt;YANDEX_GEOCODE_API_KEY&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url, params<span style="color:#f92672">=</span>params)<span style="color:#f92672">.</span>json()
+</span></span><span style="display:flex;"><span>    pos <span style="color:#f92672">=</span> res[<span style="color:#e6db74">&#39;response&#39;</span>][<span style="color:#e6db74">&#39;GeoObjectCollection&#39;</span>][<span style="color:#e6db74">&#39;featureMember&#39;</span>][<span style="color:#ae81ff">0</span>][<span style="color:#e6db74">&#39;GeoObject&#39;</span>][<span style="color:#e6db74">&#39;Point&#39;</span>][<span style="color:#e6db74">&#39;pos&#39;</span>]
+</span></span><span style="display:flex;"><span>    lon, lat <span style="color:#f92672">=</span> pos<span style="color:#f92672">.</span>split()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> float(lat), float(lon)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_weather</span>(lat: float, lon: float) <span style="color:#f92672">-&gt;</span> str:
+</span></span><span style="display:flex;"><span>    url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://api.weather.yandex.ru/v2/informers&#34;</span>
+</span></span><span style="display:flex;"><span>    headers <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;X-Yandex-API-Key&#34;</span>: <span style="color:#e6db74">&#34;&lt;YANDEX_WEATHER_API_KEY&gt;&#34;</span>}
+</span></span><span style="display:flex;"><span>    params <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;lat&#34;</span>: lat, <span style="color:#e6db74">&#34;lon&#34;</span>: lon}
+</span></span><span style="display:flex;"><span>    resp <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url, headers<span style="color:#f92672">=</span>headers, params<span style="color:#f92672">=</span>params)<span style="color:#f92672">.</span>json()
+</span></span><span style="display:flex;"><span>    fact <span style="color:#f92672">=</span> resp[<span style="color:#e6db74">&#39;fact&#39;</span>]
+</span></span><span style="display:flex;"><span>    weather <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>fact[<span style="color:#e6db74">&#39;temp&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">°C, </span><span style="color:#e6db74">{</span>fact[<span style="color:#e6db74">&#39;condition&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> weather</span></span></code></pre></div><p>Встраивание в обработчик команды</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a6e22e">@bot.message_handler</span>(commands<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;weather&#39;</span>])
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">weather_handler</span>(message):
+</span></span><span style="display:flex;"><span>    sent_msg <span style="color:#f92672">=</span> bot<span style="color:#f92672">.</span>send_message(message<span style="color:#f92672">.</span>chat<span style="color:#f92672">.</span>id, <span style="color:#e6db74">&#34;Укажите город для прогноза погоды:&#34;</span>)
+</span></span><span style="display:flex;"><span>    bot<span style="color:#f92672">.</span>register_next_step_handler(sent_msg, city_weather)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">city_weather</span>(message):
+</span></span><span style="display:flex;"><span>    city <span style="color:#f92672">=</span> message<span style="color:#f92672">.</span>text
+</span></span><span style="display:flex;"><span>    lat, lon <span style="color:#f92672">=</span> geocode_city(city)
+</span></span><span style="display:flex;"><span>    forecast <span style="color:#f92672">=</span> get_weather(lat, lon)
+</span></span><span style="display:flex;"><span>    bot<span style="color:#f92672">.</span>send_message(message<span style="color:#f92672">.</span>chat<span style="color:#f92672">.</span>id, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Погода в </span><span style="color:#e6db74">{</span>city<span style="color:#e6db74">}</span><span style="color:#e6db74">: </span><span style="color:#e6db74">{</span>forecast<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)</span></span></code></pre></div><hr>
+<h3 id="итоговая-структура-репозитория">Итоговая структура репозитория:<a class="anchor" href="#%d0%b8%d1%82%d0%be%d0%b3%d0%be%d0%b2%d0%b0%d1%8f-%d1%81%d1%82%d1%80%d1%83%d0%ba%d1%82%d1%83%d1%80%d0%b0-%d1%80%d0%b5%d0%bf%d0%be%d0%b7%d0%b8%d1%82%d0%be%d1%80%d0%b8%d1%8f">#</a></h3>
+<pre tabindex="0"><code>practice3/src/
+├── bot.py
+├── .env.example
+├── README.md
+├── requirement.txt
+├── gigachat_client.py
+├── diagrams/
+│   ├── use-case.png
+│   ├── component.png
+│   ├── horoscope_sequence.png
+│   ├── error_flow.png
+│   ├── class-diagram.png
+│   └── libs-table.png</code></pre><hr>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+  
+  
+  
+  <div class="flex flex-wrap justify-between">
+    <span>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/%D0%BE%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B5/" class="flex align-center">
+        <span>О проекте</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+  
+
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#этапы-исследования-и-реализации"><strong>Этапы исследования и реализации:</strong></a></li>
+    <li><a href="#пошаговое-выполнение">Пошаговое выполнение</a>
+      <ul>
+        <li><a href="#1-исследование-предметной-области">1. Исследование предметной области</a></li>
+        <li><a href="#2-получение-токена-у-botfather">2. Получение токена у BotFather</a></li>
+        <li><a href="#3-подготовка-python-среды">3. Подготовка Python-среды</a></li>
+        <li><a href="#4-разработка-базового-telegram-бота">4. Разработка базового Telegram-бота</a></li>
+        <li><a href="#5-функционал-гороскопа">5. Функционал гороскопа</a></li>
+        <li><a href="#6-обработка-ошибок">6. Обработка ошибок</a></li>
+        <li><a href="#7-модификация-проекта-творческий-пункт">7. Модификация проекта (творческий пункт)</a></li>
+        <li><a href="#итоговая-структура-репозитория">Итоговая структура репозитория:</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
