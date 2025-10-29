@@ -57,8 +57,7 @@ def is_horoscope_context(message) -> bool:
         return False
     text = message.text.lower()
     zodiac = [
-        'овен','телец','близнецы','рак','лев','дева',
-        'весы','скорпион','стрелец','козерог','водолей','рыбы'
+        'Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'
     ]
     return any(z in text for z in zodiac) or 'horoscope' in text
 
